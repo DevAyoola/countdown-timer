@@ -48,7 +48,6 @@ main {
 }
 
 .btn {
-	background-color: #433682;
 	color: #f5f5f5;
 	border: none;
 	border-radius: 5px;
@@ -64,13 +63,22 @@ main {
 	margin: 0 10px 0 10px;
 }
 
+.start {
+	background-color: #433682;
+	display: block;
+}
+
+.stop {
+	background-color: #b03939;
+	display: none;
+}
+
 .timer div {
 	flex-direction: column;
 }
 
 .min,
-.sec,
-.milli-sec {
+.sec {
 	background-color: #f5f5f5;
 	border-radius: 5px;
 	font-family: Courier;
@@ -98,7 +106,8 @@ main {
 }
 
 .reset {
-	padding: 7px;
+	background-color: #433682;
+	padding: 8px;
 }
 
 footer {
