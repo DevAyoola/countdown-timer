@@ -1,4 +1,4 @@
-// .start, .stop, .min, .sec, .milli-sec, .time, .reset
+// .start, .stop, .min, .sec, .time, .reset
 
 const btnStart = document.querySelector(".start");
 const btnStop = document.querySelector(".stop");
@@ -62,6 +62,9 @@ btnStop.addEventListener("click", function (e) {
 btnReset.addEventListener("click", function (e) {
 	e.preventDefault();
 	clearInterval(timer);
+
+	btnStart.style.display = "block";
+	btnStop.style.display = "none";
 
 	defaultVal();
 	valueMin = Number(min.textContent);
