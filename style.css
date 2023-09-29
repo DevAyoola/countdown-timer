@@ -58,7 +58,8 @@ main {
 }
 
 .start,
-.stop {
+.stop,
+.time-up {
 	padding: 15px;
 	margin: 0 10px 0 10px;
 }
@@ -70,6 +71,11 @@ main {
 
 .stop {
 	background-color: #b03939;
+	display: none;
+}
+
+.time-up {
+	background-color: #e63737;
 	display: none;
 }
 

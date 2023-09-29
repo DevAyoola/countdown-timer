@@ -1,7 +1,8 @@
-// .start, .stop, .min, .sec, .time, .reset
+// .start, .stop, .time-up, .min, .sec, .time, .reset
 
 const btnStart = document.querySelector(".start");
 const btnStop = document.querySelector(".stop");
+const btnTimeUp = document.querySelector(".time-up");
 const min = document.querySelector(".min");
 const sec = document.querySelector(".sec");
 const time = document.querySelector(".time");
@@ -17,6 +18,12 @@ const defaultVal = function () {
 };
 defaultVal();
 
+const resetVal = function () {
+	defaultVal();
+	valueMin = Number(min.textContent);
+	valueSec = Number(sec.textContent) + valueMin * 60;
+};
+
 let valueMin = Number(min.textContent);
 let valueSec = Number(sec.textContent) + valueMin * 60;
 let timer;
@@ -24,17 +31,24 @@ let timer;
 btnStart.addEventListener("click", function (e) {
 	e.preventDefault();
 
-	btnStart.style.display = "none";
-	btnStop.style.display = "block";
-
-	if (setInterval) {
-		clearInterval(timer);
+	if (valueSec === 0) {
+		btnStart.style.display = "none";
+		btnTimeUp.style.display = "block";
+	} else {
+		btnStart.style.display = "none";
+		btnStop.style.display = "block";
 	}
+	// if (setInterval) clearInterval(timer);
 
 	const tick = function () {
-		if (valueSec === 0) clearInterval(timer);
+		if (valueMin === 0 && valueSec === 0) {
+			clearInterval(timer);
 
-		if (valueSec % 60 === 0) {
+			btnStop.style.display = "none";
+			btnTimeUp.style.display = "block";
+		}
+
+		if (valueMin != 0 && valueSec % 60 === 0) {
 			min.textContent = String(valueMin).padStart(2, "0");
 			sec.textContent = String(0).padStart(2, "0");
 			valueMin--;
@@ -43,7 +57,7 @@ btnStart.addEventListener("click", function (e) {
 			sec.textContent = String(valueSec % 60).padStart(2, "0");
 		}
 
-		valueSec--;
+		if (valueSec != 0) valueSec--;
 	};
 
 	tick();
@@ -59,6 +73,15 @@ btnStop.addEventListener("click", function (e) {
 	clearInterval(timer);
 });
 
+btnTimeUp.addEventListener("click", function (e) {
+	e.preventDefault();
+
+	btnTimeUp.style.display = "none";
+	btnStart.style.display = "block";
+
+	resetVal();
+});
+
 btnReset.addEventListener("click", function (e) {
 	e.preventDefault();
 	clearInterval(timer);
@@ -66,8 +89,5 @@ btnReset.addEventListener("click", function (e) {
 	btnStart.style.display = "block";
 	btnStop.style.display = "none";
 
-	defaultVal();
-	valueMin = Number(min.textContent);
-	valueSec = Number(sec.textContent) + valueMin * 60;
-	return 0;
+	resetVal();
 });
